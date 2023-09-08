@@ -1,5 +1,6 @@
 package com.fincoop.associado.infra;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,11 @@ public class TratadorDeErros {
         var errors = ex.getConstraintViolations();
 
         return ResponseEntity.badRequest().body(errors.stream().map(ConstraintViolation::getMessage));
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity tratarEntityNotFoundException(EntityNotFoundException ex) {
+        return ResponseEntity.notFound().build();
     }
 
     private record DadosErroValidacao(String campo, String mensagem) {
