@@ -21,12 +21,11 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@GroupSequenceProvider(AssociadoGroupSequenceProvider.class)
+
 public class AssociadoDto {
     private UUID uuid;
 
-    @CPF(groups = CpfGroup.class, message = "CPF inválido")
-    @CNPJ(groups = CnpjGroup.class, message = "CNPJ inválido")
+    @NotBlank
     private String documento;
 
     @NotNull(message = "Tipo da pessoa é obrigatório")
