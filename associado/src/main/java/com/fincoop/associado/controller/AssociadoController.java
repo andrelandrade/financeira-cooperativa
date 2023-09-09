@@ -1,5 +1,6 @@
 package com.fincoop.associado.controller;
 
+import com.fincoop.associado.dto.AlteraAssociadoDto;
 import com.fincoop.associado.dto.AssociadoDto;
 import com.fincoop.associado.service.AssociadoService;
 import jakarta.transaction.Transactional;
@@ -42,5 +43,12 @@ public class AssociadoController {
         AssociadoDto associadoDto = service.buscarPorId(uuid);
 
         return ResponseEntity.ok(associadoDto);
+    }
+
+    @PutMapping()
+    public ResponseEntity<AssociadoDto> atualizar(@RequestBody @Valid AlteraAssociadoDto dto) {
+        service.atualiza(dto);
+
+        return ResponseEntity.noContent().build();
     }
 }
