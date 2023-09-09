@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AssociadoService {
@@ -28,6 +30,13 @@ public class AssociadoService {
 
     public AssociadoDto buscaPorDocumento(String documento) {
         Associado associado = repository.findByDocumento(documento)
+                .orElseThrow(() -> new EntityNotFoundException("Associado não encontrado"));
+
+        return modelMapper.map(associado, AssociadoDto.class);
+    }
+
+    public AssociadoDto buscarPorId(UUID uuid) {
+        Associado associado = repository.findById(uuid)
                 .orElseThrow(() -> new EntityNotFoundException("Associado não encontrado"));
 
         return modelMapper.map(associado, AssociadoDto.class);

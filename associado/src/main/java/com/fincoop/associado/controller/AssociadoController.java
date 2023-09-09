@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/associados")
@@ -32,6 +33,13 @@ public class AssociadoController {
     @GetMapping()
     public ResponseEntity<AssociadoDto> buscarPorDocumento(@RequestParam(value = "documento") String documento) {
         AssociadoDto associadoDto = service.buscaPorDocumento(documento);
+
+        return ResponseEntity.ok(associadoDto);
+    }
+
+    @GetMapping("/{uuid}")
+    public ResponseEntity<AssociadoDto> buscarPorId(@PathVariable UUID uuid) {
+        AssociadoDto associadoDto = service.buscarPorId(uuid);
 
         return ResponseEntity.ok(associadoDto);
     }
