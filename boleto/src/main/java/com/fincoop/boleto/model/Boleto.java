@@ -25,5 +25,7 @@ public class Boleto
     private String documentoPagador;
     private String nomePagador;
     private String nomeFantasiaPagador;
-    private String situacao;
+
+    @Enumerated(EnumType.STRING)
+    private Situacao situacao = Situacao.A_RECEBER;
 }
